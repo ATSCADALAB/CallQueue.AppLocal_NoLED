@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C8FB7509-4031-44B4-BAB5-9E5EB739BA1B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ModbusRTUDriver</RootNamespace>
+    <AssemblyName>ModbusRTUDriver</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Address.cs" />
+    <Compile Include="Connector\ModbusTCPConnector.cs" />
+    <Compile Include="DataIO\ModbusTCPDataIO.cs" />
+    <Compile Include="Dispatcher\ModbusTCPDispatcher.cs" />
+    <Compile Include="DriverPlugin\ModbusTCPClient.cs" />
+    <Compile Include="Management\ModbusTCPManagement.cs" />
+    <Compile Include="Reader\IReader.cs" />
+    <Compile Include="Reader\ModbusRTUReader.cs" />
+    <Compile Include="ClientAccess.cs" />
+    <Compile Include="DataIO\ModbusRTUDataIO.cs" />
+    <Compile Include="DriverPlugin\Channel.cs" />
+    <Compile Include="DataPackage.cs" />
+    <Compile Include="DataSource.cs" />
+    <Compile Include="DataType.cs" />
+    <Compile Include="Connector\IConnector.cs" />
+    <Compile Include="DataIO\IDataIO.cs" />
+    <Compile Include="Dispatcher\IDispatcher.cs" />
+    <Compile Include="Dispatcher\ModbusRTUDispatcher.cs" />
+    <Compile Include="DriverPlugin\ModbusProtocol.cs" />
+    <Compile Include="DriverPlugin\ModbusRTUMaster.cs" />
+    <Compile Include="Connector\ModbusRTUConnector.cs" />
+    <Compile Include="GroupAddress.cs" />
+    <Compile Include="Reader\ModbusTCPReader.cs" />
+    <Compile Include="Tag\DIntTag.cs" />
+    <Compile Include="Management\IManagement.cs" />
+    <Compile Include="Management\ModbusRTUManagement.cs" />
+    <Compile Include="StatusChangedEventArgs.cs" />
+    <Compile Include="Tag\TagBuilder.cs" />
+    <Compile Include="Tag\TagFactory.cs" />
+    <Compile Include="Tag\BoolTag.cs" />
+    <Compile Include="Tag\ByteTag.cs" />
+    <Compile Include="Tag\DWordTag.cs" />
+    <Compile Include="Tag\IntTag.cs" />
+    <Compile Include="Tag\ITag.cs" />
+    <Compile Include="Status.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tag\RealTag.cs" />
+    <Compile Include="Tag\TagBase.cs" />
+    <Compile Include="Tag\WordTag.cs" />
+    <Compile Include="ValueChangedEventArgs.cs" />
+    <Compile Include="Writter\IWriter.cs" />
+    <Compile Include="Writter\ModbusRTUWriter.cs" />
+    <Compile Include="Writter\ModbusTCPWriter.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

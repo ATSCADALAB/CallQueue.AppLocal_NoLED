@@ -1,0 +1,749 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{452F1154-CA70-4680-B194-05E15B8C9A17}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>CallQueue.AppLocal</RootNamespace>
+    <AssemblyName>CallQueue.AppLocal</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>atm.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility" />
+    <Reference Include="DevExpress.Charts.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.CodeParser.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Dashboard.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Dashboard.v19.1.Win, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.DataAccess.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.DataAccess.v19.1.UI, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Map.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Mvvm.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Office.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Pdf.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.PivotGrid.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v19.1.Export, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Sparkline.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.TreeMap.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v19.1.UI, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpo.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v19.1.Extensions, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v19.1.UI, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v19.1.Wizard, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGauges.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGauges.v19.1.Presets, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGauges.v19.1.Win, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGrid.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraLayout.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraMap.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraNavBar.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPivotGrid.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v19.1.Extensions, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraRichEdit.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraTreeList.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraTreeMap.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraVerticalGrid.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="Fleck, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fleck.1.2.0\lib\net45\Fleck.dll</HintPath>
+    </Reference>
+    <Reference Include="ModbusRTUDriver">
+      <HintPath>..\ModbusRTUDriver\bin\Debug\ModbusRTUDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.7.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.7.9\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Raspberry.IO.GeneralPurpose">
+      <HintPath>..\..\..\Others\Raspberry.IO.GeneralPurpose.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commons\CallQueueExtensions.cs" />
+    <Compile Include="Commons\IoC.cs" />
+    <Compile Include="Commons\Utils.cs" />
+    <Compile Include="Controls\ServiceDashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ServiceDashboard.Designer.cs">
+      <DependentUpon>ServiceDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSelectCounter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelectCounter.Designer.cs">
+      <DependentUpon>frmSelectCounter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSelectPiorityNumber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelectPiorityNumber.Designer.cs">
+      <DependentUpon>frmSelectPiorityNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ModbusMaster\frmEditModbusMasterParameter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\ModbusMaster\frmEditModbusMasterParameter.Designer.cs">
+      <DependentUpon>frmEditModbusMasterParameter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ModbusMaster\ModbusMasterPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\ModbusMaster\ModbusMasterPage.Designer.cs">
+      <DependentUpon>ModbusMasterPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Counter\frmCounterModbusConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Counter\frmCounterModbusConfig.Designer.cs">
+      <DependentUpon>frmCounterModbusConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\HomePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\HomePage.Designer.cs">
+      <DependentUpon>HomePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Counter\CounterPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Counter\CounterPage.Designer.cs">
+      <DependentUpon>CounterPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Counter\frmEditCounter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Counter\frmEditCounter.Designer.cs">
+      <DependentUpon>frmEditCounter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Service\frmEditService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Service\frmEditService.Designer.cs">
+      <DependentUpon>frmEditService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Account\frmEditAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Account\frmEditAccount.Designer.cs">
+      <DependentUpon>frmEditAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\OrderReport\frmReportOrderSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\OrderReport\frmReportOrderSetting.Designer.cs">
+      <DependentUpon>frmReportOrderSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CallVoice\CallVoiceSetting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\CallVoice\CallVoiceSetting.Designer.cs">
+      <DependentUpon>CallVoiceSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Commons\Interfaces\ISupportTransitions.cs" />
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Modules\Role\RolePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Role\RolePage.Designer.cs">
+      <DependentUpon>RolePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportByTime.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ReportByTime.Designer.cs">
+      <DependentUpon>ReportByTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ReportSetting\ReportSettingPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\ReportSetting\ReportSettingPage.Designer.cs">
+      <DependentUpon>ReportSettingPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptByCounter.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptByCounter.Designer.cs">
+      <DependentUpon>rptByCounter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptOrder.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptOrder.Designer.cs">
+      <DependentUpon>rptOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Account\AccountPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Account\AccountPage.Designer.cs">
+      <DependentUpon>AccountPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Service\ServicePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Service\ServicePage.Designer.cs">
+      <DependentUpon>ServicePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CounterDashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CounterDashboard.Designer.cs">
+      <DependentUpon>CounterDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WebSocket\QueueWebSocketIntegration.cs" />
+    <Compile Include="WebSocket\QueueWebSocketServer.cs" />
+    <Compile Include="WebSocket\WebSocketModels.cs" />
+    <EmbeddedResource Include="Controls\ServiceDashboard.resx">
+      <DependentUpon>ServiceDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CounterDashboard.resx">
+      <DependentUpon>CounterDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelectCounter.resx">
+      <DependentUpon>frmSelectCounter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelectPiorityNumber.resx">
+      <DependentUpon>frmSelectPiorityNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Counter\frmCounterModbusConfig.resx">
+      <DependentUpon>frmCounterModbusConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\HomePage.resx">
+      <DependentUpon>HomePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Counter\CounterPage.resx">
+      <DependentUpon>CounterPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Counter\frmEditCounter.resx">
+      <DependentUpon>frmEditCounter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\ModbusMaster\frmEditModbusMasterParameter.resx">
+      <DependentUpon>frmEditModbusMasterParameter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\ModbusMaster\ModbusMasterPage.resx">
+      <DependentUpon>ModbusMasterPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\ReportSetting\ReportSettingPage.resx">
+      <DependentUpon>ReportSettingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Service\frmEditService.resx">
+      <DependentUpon>frmEditService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Account\frmEditAccount.resx">
+      <DependentUpon>frmEditAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\CallVoice\CallVoiceSetting.resx">
+      <DependentUpon>CallVoiceSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\OrderReport\frmReportOrderSetting.resx">
+      <DependentUpon>frmReportOrderSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Account\AccountPage.resx">
+      <DependentUpon>AccountPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Service\ServicePage.resx">
+      <DependentUpon>ServicePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="ReportByTime.resx">
+      <DependentUpon>ReportByTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptByCounter.resx">
+      <DependentUpon>rptByCounter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptOrder.resx">
+      <DependentUpon>rptOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CallQueue.Controls\CallQueue.Controls.csproj">
+      <Project>{a5a17900-8457-485b-a9e7-57f1bc7e40d3}</Project>
+      <Name>CallQueue.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CallQueue.Core\CallQueue.Core.csproj">
+      <Project>{01562AE7-804A-4069-8D20-46C628FB00D3}</Project>
+      <Name>CallQueue.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SQLHelper\SQLHelper.csproj">
+      <Project>{3C1C5868-861E-4DBE-A431-81FF3C33DAEF}</Project>
+      <Name>SQLHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\technology_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\next.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\next1.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\actions_next.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\open.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\report_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\properties_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reset2_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reset2_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\newemployee_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\newemployee_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\saveandclose_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\saveandclose_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reset2_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reset2_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refreshallpivottable_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refreshallpivottable_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clearall_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clearall_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\checkbox2_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\checkbox2_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\technology_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\feature_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\feature_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\feature_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\feature_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\prev_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\prev_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\next_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\next_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reset2_32x322.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reset2_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\forward_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\forward_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backward_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backward_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LOGO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modules\Report\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printer_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printer_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exporttoxlsx_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exporttoxlsx_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exporttopdf_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exporttopdf_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exporttopdf_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exporttopdf_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printquick_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printquick_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\print_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\print_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\export_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\export_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exporttoxlsx_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exporttoxlsx_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exporttopdf_32x322.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exporttopdf_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filter_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filter_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\removepivotfield_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\removepivotfield_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh2_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh2_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_32x322.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh2_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh2_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_32x322.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_32x323.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_16x163.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_32x322.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh2_32x322.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh2_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_32x323.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_16x163.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_32x324.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_16x164.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_32x323.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_16x163.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh2_32x323.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh2_16x163.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_32x322.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_32x324.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_16x164.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inserttablecells_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inserttablecells_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boposition2_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boposition2_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\feature_32x322.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\feature_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backward_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backward_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\forward_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\forward_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\feature_16x163.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\feature_32x323.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backward_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backward_32x322.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="atm.ico" />
+    <Content Include="Resources\logoCus.png" />
+    <None Include="Resources\logoCus1.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

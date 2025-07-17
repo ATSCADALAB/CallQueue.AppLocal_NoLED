@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallQueue.AppLocal", "CallQueue.AppLocal\CallQueue.AppLocal.csproj", "{452F1154-CA70-4680-B194-05E15B8C9A17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallQueue.Core", "CallQueue.Core\CallQueue.Core.csproj", "{01562AE7-804A-4069-8D20-46C628FB00D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLHelper", "SQLHelper\SQLHelper.csproj", "{3C1C5868-861E-4DBE-A431-81FF3C33DAEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallQueue.Controls", "CallQueue.Controls\CallQueue.Controls.csproj", "{A5A17900-8457-485B-A9E7-57F1BC7E40D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{008CA5FB-C406-43BB-8A0D-D956681296EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallQueue.PrintController", "CallQueue.PrintController\CallQueue.PrintController.csproj", "{CCC4C852-378E-497B-BDAE-9A8C800B4D3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModbusRTUDriver", "ModbusRTUDriver\ModbusRTUDriver.csproj", "{C8FB7509-4031-44B4-BAB5-9E5EB739BA1B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{452F1154-CA70-4680-B194-05E15B8C9A17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{452F1154-CA70-4680-B194-05E15B8C9A17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{452F1154-CA70-4680-B194-05E15B8C9A17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{452F1154-CA70-4680-B194-05E15B8C9A17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01562AE7-804A-4069-8D20-46C628FB00D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01562AE7-804A-4069-8D20-46C628FB00D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01562AE7-804A-4069-8D20-46C628FB00D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01562AE7-804A-4069-8D20-46C628FB00D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C1C5868-861E-4DBE-A431-81FF3C33DAEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C1C5868-861E-4DBE-A431-81FF3C33DAEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C1C5868-861E-4DBE-A431-81FF3C33DAEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C1C5868-861E-4DBE-A431-81FF3C33DAEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5A17900-8457-485B-A9E7-57F1BC7E40D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5A17900-8457-485B-A9E7-57F1BC7E40D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5A17900-8457-485B-A9E7-57F1BC7E40D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5A17900-8457-485B-A9E7-57F1BC7E40D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{008CA5FB-C406-43BB-8A0D-D956681296EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{008CA5FB-C406-43BB-8A0D-D956681296EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{008CA5FB-C406-43BB-8A0D-D956681296EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{008CA5FB-C406-43BB-8A0D-D956681296EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCC4C852-378E-497B-BDAE-9A8C800B4D3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCC4C852-378E-497B-BDAE-9A8C800B4D3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCC4C852-378E-497B-BDAE-9A8C800B4D3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCC4C852-378E-497B-BDAE-9A8C800B4D3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8FB7509-4031-44B4-BAB5-9E5EB739BA1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8FB7509-4031-44B4-BAB5-9E5EB739BA1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8FB7509-4031-44B4-BAB5-9E5EB739BA1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8FB7509-4031-44B4-BAB5-9E5EB739BA1B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E281C33-AABE-4A04-AE29-7392CFC8912E}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A5A17900-8457-485B-A9E7-57F1BC7E40D3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>CallQueue.Controls</RootNamespace>
+    <AssemblyName>CallQueue.Controls</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Charts.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Office.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Pdf.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.PivotGrid.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v19.1.Export, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Sparkline.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGauges.v19.1.Core, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v19.1, Version=19.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=6.7.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.7.9\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CallVoice.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CallVoice.Designer.cs">
+      <DependentUpon>CallVoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueuePrinter.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="QueuePrinter.Designer.cs">
+      <DependentUpon>QueuePrinter.cs</DependentUpon>
+    </Compile>
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Resource\KHÔNG.wav" />
+    <EmbeddedResource Include="Resource\MỘT.wav" />
+    <EmbeddedResource Include="Resource\HAI.wav" />
+    <EmbeddedResource Include="Resource\BA.wav" />
+    <EmbeddedResource Include="Resource\BỐN.wav" />
+    <EmbeddedResource Include="Resource\NĂM.wav" />
+    <EmbeddedResource Include="Resource\SÁU.wav" />
+    <EmbeddedResource Include="Resource\BẢY.wav" />
+    <EmbeddedResource Include="Resource\TÁM.wav" />
+    <EmbeddedResource Include="Resource\CHÍN.wav" />
+    <EmbeddedResource Include="Resource\A.wav" />
+    <EmbeddedResource Include="Resource\B.wav" />
+    <EmbeddedResource Include="Resource\BIỂN SỐ.wav" />
+    <EmbeddedResource Include="Resource\C.wav" />
+    <EmbeddedResource Include="Resource\D.wav" />
+    <EmbeddedResource Include="Resource\E.wav" />
+    <EmbeddedResource Include="Resource\F.wav" />
+    <EmbeddedResource Include="Resource\G.wav" />
+    <EmbeddedResource Include="Resource\H.wav" />
+    <EmbeddedResource Include="Resource\LINH.wav" />
+    <EmbeddedResource Include="Resource\LĂM.wav" />
+    <EmbeddedResource Include="Resource\LẺ.wav" />
+    <EmbeddedResource Include="Resource\MƯƠI.wav" />
+    <EmbeddedResource Include="Resource\MƯỜI.wav" />
+    <EmbeddedResource Include="Resource\NGHÌN.wav" />
+    <EmbeddedResource Include="Resource\NHẠC ĐỆM.wav" />
+    <EmbeddedResource Include="Resource\RA CỔNG SỐ.wav" />
+    <EmbeddedResource Include="Resource\RA CỬA SỐ.wav" />
+    <EmbeddedResource Include="Resource\TRĂM.wav" />
+    <EmbeddedResource Include="Resource\VÀO CỔNG SỐ.wav" />
+    <EmbeddedResource Include="Resource\VÀO CỬA SỐ.wav" />
+    <EmbeddedResource Include="Resource\VÀO PHÒNG SỐ.wav" />
+    <EmbeddedResource Include="Resource\XE.wav" />
+    <EmbeddedResource Include="Resource\XIN MỜI BỆNH NHÂN CÓ SỐ THỨ TỰ.wav" />
+    <EmbeddedResource Include="Resource\XIN MỜI KHÁCH HÀNG CÓ SỐ THỨ TỰ.wav" />
+    <EmbeddedResource Include="Resource\ĐẾN BÀN SỐ.wav" />
+    <EmbeddedResource Include="Resource\ĐẾN CỔNG SỐ.wav" />
+    <EmbeddedResource Include="Resource\ĐẾN CỬA SỐ.wav" />
+    <EmbeddedResource Include="Resource\ĐẾN GIƯỜNG SỐ.wav" />
+    <EmbeddedResource Include="Resource\ĐẾN KHU.wav" />
+    <EmbeddedResource Include="Resource\ĐẾN PHÒNG KHÁM SỐ.wav" />
+    <EmbeddedResource Include="Resource\ĐẾN PHÒNG SỐ.wav" />
+    <EmbeddedResource Include="Resource\ĐẾN ĐƯỜNG SỐ.wav" />
+    <EmbeddedResource Include="Resource\ĐỂ NHẬN HÀNG.wav" />
+    <EmbeddedResource Include="Resource\ĐỂ NHẬN ĐỒ UỐNG.wav" />
+    <EmbeddedResource Include="Resource\ĐỂ NHẬN ĐỒ ĂN.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\0.wav" />
+    <EmbeddedResource Include="Resource\1.wav" />
+    <EmbeddedResource Include="Resource\2.wav" />
+    <EmbeddedResource Include="Resource\3.wav" />
+    <EmbeddedResource Include="Resource\4.wav" />
+    <EmbeddedResource Include="Resource\5.wav" />
+    <EmbeddedResource Include="Resource\6.wav" />
+    <EmbeddedResource Include="Resource\7.wav" />
+    <EmbeddedResource Include="Resource\8.wav" />
+    <EmbeddedResource Include="Resource\9.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\ĐẾN QUẦY SỐ.wav" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
