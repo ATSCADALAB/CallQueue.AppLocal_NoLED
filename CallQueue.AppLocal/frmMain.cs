@@ -323,7 +323,7 @@ namespace CallQueue.AppLocal
                 {
                     counterToCurrentQueueDictionary[counterId] = currentQueue;
                     DisplayCurrentQueueToHomePage(counterId);
-                    CallVoice(currentQueue);  // ← Bật lại CallVoice
+                    //CallVoice(currentQueue);  // ← Bật lại CallVoice
                     NotifyWebSocketCallNext(counterId, currentQueue);
                     return true;
                 }
@@ -590,7 +590,7 @@ namespace CallQueue.AppLocal
             return number;
         }
 
-        private void DisplayCurrentQueueToHomePage(int counterId)
+        public void DisplayCurrentQueueToHomePage(int counterId)
         {
             try
             {
@@ -644,7 +644,9 @@ namespace CallQueue.AppLocal
                     counterName: counter?.Name ?? string.Format("Quầy {0}", counterId),
                     currentNumber: queueInfo.Number,
                     serviceName: service?.Name ?? "Unknown Service",
+                    customerName: queueInfo.CustomerName,
                     displayNumber: GetDisplayNumber(queueInfo) ?? queueInfo.Number.ToString().PadLeft(3, '0')
+                   
                 );
 
                 Console.WriteLine(string.Format("📤 Đã gửi CallNext: {0} tại {1}",
@@ -676,6 +678,7 @@ namespace CallQueue.AppLocal
                     counterName: counter?.Name ?? string.Format("Quầy {0}", counterId),
                     currentNumber: queueInfo.Number,
                     serviceName: service?.Name ?? "Unknown Service",
+                    customerName: queueInfo.CustomerName,
                     displayNumber: GetDisplayNumber(queueInfo) ?? queueInfo.Number.ToString().PadLeft(3, '0')
                 );
 
@@ -708,6 +711,7 @@ namespace CallQueue.AppLocal
                     counterName: counter?.Name ?? string.Format("Quầy {0}", counterId),
                     currentNumber: queueInfo.Number,
                     serviceName: service?.Name ?? "Unknown Service",
+                    customerName: queueInfo.CustomerName,
                     displayNumber: GetDisplayNumber(queueInfo) ?? queueInfo.Number.ToString().PadLeft(3, '0')
                 );
 
@@ -733,6 +737,7 @@ namespace CallQueue.AppLocal
                     counterName: counter?.Name ?? $"Quầy {counterId}",
                     priorityNumber: queueInfo?.Number ?? number,
                     serviceName: service?.Name ?? "Unknown Service",
+                    customerName: queueInfo?.CustomerName?? "Unknown",
                     displayNumber: queueInfo != null
                         ? (GetDisplayNumber(queueInfo) ?? number.ToString().PadLeft(3, '0'))
                         : number.ToString().PadLeft(3, '0')

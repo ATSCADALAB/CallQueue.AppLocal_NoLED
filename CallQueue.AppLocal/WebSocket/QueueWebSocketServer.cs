@@ -398,7 +398,7 @@ namespace CallQueue.AppLocal.WebSocket
         // ====================================================================================
 
         public void BroadcastCallNext(int counterId, string counterName, int currentNumber,
-            string serviceName, string displayNumber = null)
+            string serviceName, string customerName, string displayNumber = null)
         {
             try
             {
@@ -411,7 +411,8 @@ namespace CallQueue.AppLocal.WebSocket
                     NextNumber = currentNumber + 1,
                     ServiceName = serviceName ?? "Unknown Service",
                     DisplayNumber = displayNumber ?? currentNumber.ToString().PadLeft(3, '0'),
-                    Message = string.Format("Đã gọi số {0} tại {1}", currentNumber, counterName)
+                    Message = string.Format("Đã gọi số {0} tại {1}", currentNumber, counterName),
+                    CustomerName= customerName
                 };
 
                 var message = new WebSocketMessage
@@ -430,7 +431,7 @@ namespace CallQueue.AppLocal.WebSocket
         }
 
         public void BroadcastCallPrevious(int counterId, string counterName, int currentNumber,
-            string serviceName, string displayNumber = null)
+            string serviceName, string customerName, string displayNumber = null)
         {
             try
             {
@@ -443,7 +444,8 @@ namespace CallQueue.AppLocal.WebSocket
                     PreviousNumber = Math.Max(1, currentNumber - 1),
                     ServiceName = serviceName ?? "Unknown Service",
                     DisplayNumber = displayNumber ?? currentNumber.ToString().PadLeft(3, '0'),
-                    Message = string.Format("Đã gọi lui số {0} tại {1}", currentNumber, counterName)
+                    Message = string.Format("Đã gọi lui số {0} tại {1}", currentNumber, counterName),
+                    CustomerName = customerName
                 };
 
                 var message = new WebSocketMessage
@@ -462,7 +464,7 @@ namespace CallQueue.AppLocal.WebSocket
         }
 
         public void BroadcastCallAgain(int counterId, string counterName, int currentNumber,
-            string serviceName, string displayNumber = null)
+            string serviceName, string customerName, string displayNumber = null)
         {
             try
             {
@@ -474,7 +476,8 @@ namespace CallQueue.AppLocal.WebSocket
                     CurrentNumber = currentNumber,
                     ServiceName = serviceName ?? "Unknown Service",
                     DisplayNumber = displayNumber ?? currentNumber.ToString().PadLeft(3, '0'),
-                    Message = string.Format("Đã gọi lại số {0} tại {1}", currentNumber, counterName)
+                    Message = string.Format("Đã gọi lại số {0} tại {1}", currentNumber, counterName),
+                    CustomerName = customerName
                 };
 
                 var message = new WebSocketMessage
@@ -493,7 +496,7 @@ namespace CallQueue.AppLocal.WebSocket
         }
 
         public void BroadcastCallPriority(int counterId, string counterName, int priorityNumber,
-            string serviceName, string displayNumber = null)
+            string serviceName, string customerName, string displayNumber = null)
         {
             try
             {
@@ -506,7 +509,8 @@ namespace CallQueue.AppLocal.WebSocket
                     ServiceName = serviceName ?? "Unknown Service",
                     DisplayNumber = displayNumber ?? priorityNumber.ToString().PadLeft(3, '0'),
                     Priority = PriorityLevels.High,
-                    Message = string.Format("Đã gọi ưu tiên số {0} tại {1}", priorityNumber, counterName)
+                    Message = string.Format("Đã gọi ưu tiên số {0} tại {1}", priorityNumber, counterName),
+                    CustomerName= customerName
                 };
 
                 var message = new WebSocketMessage

@@ -37,7 +37,7 @@ namespace CallQueue.AppLocal.WebSocket
         public string Priority { get; set; }
         public bool Success { get; set; }
         public string Message { get; set; }
-
+        public string CustomerName { get; set; }
         public QueueCallData()
         {
             CallTime = DateTime.Now;

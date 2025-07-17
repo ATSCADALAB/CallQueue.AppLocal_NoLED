@@ -148,7 +148,7 @@ namespace CallQueue.AppLocal.WebSocket
         /// Thông báo "Gọi Tới" tới web clients
         /// </summary>
         public void NotifyCallNext(int counterId, string counterName, int currentNumber, 
-            string serviceName, string displayNumber = null)
+            string serviceName, string customerName ,string displayNumber = null)
         {
             try
             {
@@ -161,7 +161,7 @@ namespace CallQueue.AppLocal.WebSocket
                 lock (_lockObject)
                 {
                     _webSocketServer.BroadcastCallNext(counterId, counterName, currentNumber, 
-                        serviceName, displayNumber);
+                        serviceName, customerName, displayNumber);
                 }
             }
             catch (Exception ex)
@@ -175,7 +175,7 @@ namespace CallQueue.AppLocal.WebSocket
         /// Thông báo "Gọi Lui" tới web clients
         /// </summary>
         public void NotifyCallPrevious(int counterId, string counterName, int currentNumber, 
-            string serviceName, string displayNumber = null)
+            string serviceName, string customerName, string displayNumber = null)
         {
             try
             {
@@ -188,7 +188,7 @@ namespace CallQueue.AppLocal.WebSocket
                 lock (_lockObject)
                 {
                     _webSocketServer.BroadcastCallPrevious(counterId, counterName, currentNumber, 
-                        serviceName, displayNumber);
+                        serviceName, customerName, displayNumber);
                 }
             }
             catch (Exception ex)
@@ -202,7 +202,7 @@ namespace CallQueue.AppLocal.WebSocket
         /// Thông báo "Gọi Lại" tới web clients
         /// </summary>
         public void NotifyCallAgain(int counterId, string counterName, int currentNumber, 
-            string serviceName, string displayNumber = null)
+            string serviceName, string customerName, string displayNumber = null)
         {
             try
             {
@@ -215,7 +215,7 @@ namespace CallQueue.AppLocal.WebSocket
                 lock (_lockObject)
                 {
                     _webSocketServer.BroadcastCallAgain(counterId, counterName, currentNumber, 
-                        serviceName, displayNumber);
+                        serviceName, customerName, displayNumber);
                 }
             }
             catch (Exception ex)
@@ -229,7 +229,7 @@ namespace CallQueue.AppLocal.WebSocket
         /// Thông báo "Gọi Ưu Tiên" tới web clients
         /// </summary>
         public void NotifyCallPriority(int counterId, string counterName, int priorityNumber, 
-            string serviceName, string displayNumber = null)
+            string serviceName,string customerName, string displayNumber = null)
         {
             try
             {
@@ -242,7 +242,7 @@ namespace CallQueue.AppLocal.WebSocket
                 lock (_lockObject)
                 {
                     _webSocketServer.BroadcastCallPriority(counterId, counterName, priorityNumber, 
-                        serviceName, displayNumber);
+                        serviceName, customerName, displayNumber);
                 }
             }
             catch (Exception ex)
@@ -335,35 +335,6 @@ namespace CallQueue.AppLocal.WebSocket
                 return "Lỗi lấy server info: " + ex.Message;
             }
         }
-
-        /// <summary>
-        /// Test WebSocket connection bằng cách gửi test message
-        /// </summary>
-        public void TestConnection()
-        {
-            try
-            {
-                NotifyCallNext(
-                    counterId: 999,
-                    counterName: "Test Counter",
-                    currentNumber: 999,
-                    serviceName: "Test Service",
-                    displayNumber: "999"
-                );
-                
-                Console.WriteLine("✅ WebSocket test message đã gửi");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("❌ WebSocket test thất bại: " + ex.Message);
-                Debug.WriteLine("WebSocket test error: " + ex.ToString());
-            }
-        }
-
-        // ====================================================================================
-        // Cleanup và Disposal
-        // ====================================================================================
-
         /// <summary>
         /// Shutdown WebSocket integration
         /// </summary>

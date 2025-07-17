@@ -9,7 +9,7 @@ namespace CallQueue.Core
     public class QueueManager
     {
         ISQLHelper sqlHelper;
-        
+
         public QueueManager(ISQLHelper sqlHelper)
         {
             this.sqlHelper = sqlHelper;
@@ -93,41 +93,181 @@ namespace CallQueue.Core
             return queueInfor.Id != 0;
         }
 
-        public QueueInfor GetLastCalledQueueInfor(int counterId, string query = "call proc_getlastqueueinfo({0})")
+        public QueueInfor GetLastCalledQueueInfor(int counterId, string query = "call proc_getlastcalledqueue({0})")
         {
             query = string.Format(query, counterId);
             return GetQueueInforByQuery(query);
         }
 
-        public List<QueueInfor> GetAllQueue(string query = "call proc_getallqueue()")
+        public List<QueueInfor> GetWaitingQueueList(int counterId, string query = "call proc_getwaitingqueue({0})")
         {
+            query = string.Format(query, counterId);
             return GetAllQueueInforByQuery(query);
         }
 
-        public List<QueueInfor> GetAllQueue(int serviceId, string query = "call proc_getallqueuebyservice({0})")
+        // ============= THÊM CÁC METHOD MỚI =============
+
+        /// <summary>
+        /// Kết quả đăng ký khách hàng
+        /// </summary>
+        public class CustomerRegistrationResult
         {
-            query = string.Format(query, serviceId);
-            return GetAllQueueInforByQuery(query);
+            public bool Success { get; set; }
+            public string Message { get; set; }
+            public int QueueNumber { get; set; }
+            public string CustomerName { get; set; }
         }
 
-        public int CountRemainInQueue(int counterId)
+        /// <summary>
+        /// Đăng ký khách hàng vào hàng chờ
+        /// </summary>
+        /// <param name="customerName">Tên khách hàng</param>
+        /// <param name="serviceId">ID dịch vụ (mặc định = 1)</param>
+        /// <returns>Kết quả đăng ký</returns>
+        public CustomerRegistrationResult RegisterCustomer(string customerName, int serviceId = 1)
+        {
+            var result = new CustomerRegistrationResult();
+
+            try
+            {
+                if (string.IsNullOrWhiteSpace(customerName))
+                {
+                    result.Success = false;
+                    result.Message = "Tên khách hàng không được để trống!";
+                    return result;
+                }
+
+                // Lấy số thứ tự tiếp theo
+                int nextNumber = GetNextQueueNumber(serviceId);
+
+                if (nextNumber <= 0)
+                {
+                    result.Success = false;
+                    result.Message = "Không thể tạo số thứ tự mới!";
+                    return result;
+                }
+
+                // Escape tên khách hàng để tránh SQL injection
+                string escapedCustomerName = customerName.Trim().Replace("'", "''");
+                DateTime now = DateTime.Now;
+
+                // Insert vào queue
+                string insertQueueQuery = $@"
+                    INSERT INTO queue (DateTime, ServiceId, Number, customername) 
+                    VALUES ('{now:yyyy-MM-dd HH:mm:ss}', {serviceId}, {nextNumber}, '{escapedCustomerName}')";
+
+                // Insert vào callhistory
+                string insertHistoryQuery = $@"
+                    INSERT INTO callhistory (PrintTime, ServiceId, PrintedNumber, customername, CallTime, CounterId) 
+                    VALUES ('{now:yyyy-MM-dd HH:mm:ss}', {serviceId}, {nextNumber}, '{escapedCustomerName}', NULL, NULL)";
+
+                // Cập nhật service
+                string updateServiceQuery = $@"
+                    UPDATE service 
+                    SET PrintedNumber = {nextNumber}, 
+                        UseCountOfDay = UseCountOfDay + 1,
+                        UseCountOfWeek = UseCountOfWeek + 1,
+                        UseCountOfMonth = UseCountOfMonth + 1,
+                        UseCountOfYear = UseCountOfYear + 1
+                    WHERE Id = {serviceId}";
+
+                // Thực hiện các query
+                sqlHelper.ExecuteNonQuery(insertQueueQuery);
+                sqlHelper.ExecuteNonQuery(insertHistoryQuery);
+                sqlHelper.ExecuteNonQuery(updateServiceQuery);
+
+                result.Success = true;
+                result.Message = "Đăng ký thành công!";
+                result.QueueNumber = nextNumber;
+                result.CustomerName = customerName.Trim();
+
+                Debug.WriteLine($"✅ Đăng ký thành công: {customerName} - Số {nextNumber}");
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = $"Lỗi đăng ký: {ex.Message}";
+                Debug.WriteLine($"❌ Lỗi đăng ký khách hàng: {ex}");
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Lấy số thứ tự tiếp theo cho service
+        /// </summary>
+        private int GetNextQueueNumber(int serviceId)
         {
             try
             {
-                string query = $"proc_countremaininqueuebycounterid({counterId})";
-                return Convert.ToInt32(sqlHelper.ExecuteScalarQuery(query));
+                string query = $"SELECT PrintedNumber FROM service WHERE Id = {serviceId}";
+
+                DataTable dt = sqlHelper.ExecuteQuery(query);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    var result = dt.Rows[0]["PrintedNumber"];
+                    if (result != null && int.TryParse(result.ToString(), out int currentNumber))
+                    {
+                        return currentNumber + 1;
+                    }
+                }
             }
-            catch { return 0; }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"❌ Lỗi lấy số thứ tự: {ex}");
+            }
+
+            return 0;
         }
 
-        public int CountRemainInQueue()
+        /// <summary>
+        /// Lấy danh sách queue chờ với tên khách hàng
+        /// </summary>
+        /// <param name="serviceId">ID dịch vụ</param>
+        /// <returns>Danh sách queue chờ</returns>
+        public List<QueueInfor> GetQueueWithCustomerName(int serviceId = 1)
         {
             try
             {
-                string query = $"call proc_countremaininqueue()";
-                return Convert.ToInt32(sqlHelper.ExecuteScalarQuery(query));
+                string query = $@"
+                    SELECT q.Id, q.DateTime, q.Number, q.ServiceId, 
+                           COALESCE(q.customername, '') as CustomerName,
+                           s.Mark, s.NumberFormat, s.CallVoiceContent
+                    FROM queue q 
+                    INNER JOIN service s ON q.ServiceId = s.Id 
+                    WHERE q.ServiceId = {serviceId} 
+                    ORDER BY q.DateTime ASC";
+
+                DataTable dt = sqlHelper.ExecuteQuery(query);
+                var queueList = new List<QueueInfor>();
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        var queue = new QueueInfor
+                        {
+                            Id = Convert.ToInt32(row["Id"]),
+                            DateTime = Convert.ToDateTime(row["DateTime"]),
+                            Number = Convert.ToInt32(row["Number"]),
+                            ServiceId = Convert.ToInt32(row["ServiceId"]),
+                            Mark = row["Mark"]?.ToString() ?? "",
+                            NumberFormat = row["NumberFormat"]?.ToString() ?? "",
+                            CallVoiceContent = row["CallVoiceContent"]?.ToString() ?? "",
+                            CustomerName = row["CustomerName"]?.ToString() ?? ""
+                        };
+                        queueList.Add(queue);
+                    }
+                }
+
+                return queueList;
             }
-            catch { return 0; }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"❌ Lỗi lấy danh sách queue: {ex}");
+                return new List<QueueInfor>();
+            }
         }
     }
 }

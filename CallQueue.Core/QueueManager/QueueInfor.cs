@@ -13,5 +13,8 @@ namespace CallQueue.Core
         public string CounterVoice { get; set; }
         public string NumberFormat { get; set; }
         public string CallVoiceContent { get; set; }
+
+        // ===== THÊM PROPERTY MỚI =====
+        public string CustomerName { get; set; } = "";
     }
 }

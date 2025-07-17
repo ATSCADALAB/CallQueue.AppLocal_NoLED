@@ -33,6 +33,7 @@
             this.beiCounter = new DevExpress.XtraBars.BarEditItem();
             this.lueCounter = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.btnPiorityCall = new DevExpress.XtraBars.BarButtonItem();
+            this.btnRegisterCustomer = new DevExpress.XtraBars.BarButtonItem();
             this.btnCallPrevious = new DevExpress.XtraBars.BarButtonItem();
             this.btnCallNext = new DevExpress.XtraBars.BarButtonItem();
             this.btnCallAgain = new DevExpress.XtraBars.BarButtonItem();
@@ -74,6 +75,7 @@
             this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItem3 = new DevExpress.XtraBars.BarStaticItem();
+            this.colCustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueCounter)).BeginInit();
             this.panel1.SuspendLayout();
@@ -96,6 +98,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitterItem1)).BeginInit();
             this.SuspendLayout();
             // 
+
+            //
+            this.colCustomerName.Caption = "Tên Khách Hàng";
+            this.colCustomerName.FieldName = "CustomerName";
+            this.colCustomerName.Name = "colCustomerName";
+            this.colCustomerName.Visible = true;
+            this.colCustomerName.VisibleIndex = 3;
+            this.colCustomerName.Width = 150;
             // ribbonControl1
             // 
             this.ribbonControl1.ExpandCollapseItem.Id = 0;
@@ -107,6 +117,7 @@
             this.btnCallPrevious,
             this.btnCallNext,
             this.btnCallAgain,
+            this.btnRegisterCustomer,
             this.barStaticItem2,
             this.barStaticItem4,
             this.barStaticItem5,
@@ -271,6 +282,7 @@
             this.ribbonPageGroup1.ItemLinks.Add(this.btnCallPrevious);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnCallNext, "F3");
             this.ribbonPageGroup1.ItemLinks.Add(this.btnCallAgain);
+            this.ribbonPageGroup1.ItemLinks.Add(this.btnRegisterCustomer);
             this.ribbonPageGroup1.ItemsLayout = DevExpress.XtraBars.Ribbon.RibbonPageGroupItemsLayout.OneRow;
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "Command";
@@ -354,6 +366,7 @@
             this.colDateTime,
             this.colService,
             this.colPrintedNumber,
+            this.colCustomerName,
             this.colPiority});
             this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFullFocus;
             this.gridView1.GridControl = this.gridControl1;
@@ -600,6 +613,13 @@
             this.barStaticItem3.Name = "barStaticItem3";
             this.barStaticItem3.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
+            //Đăng Ký
+            this.btnRegisterCustomer.Caption = "Đăng Ký KH";
+            this.btnRegisterCustomer.Id = 16;
+            this.btnRegisterCustomer.ImageOptions.Image = global::CallQueue.AppLocal.Properties.Resources.feature_16x163;
+            this.btnRegisterCustomer.ImageOptions.LargeImage = global::CallQueue.AppLocal.Properties.Resources.feature_16x163;
+            this.btnRegisterCustomer.Name = "btnRegisterCustomer";
+            this.btnRegisterCustomer.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRegisterCustomer_ItemClick);
             // HomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -670,6 +690,7 @@
         private DevExpress.XtraBars.BarButtonItem btnCallPrevious;
         private DevExpress.XtraBars.BarButtonItem btnCallNext;
         private DevExpress.XtraBars.BarButtonItem btnCallAgain;
+        private DevExpress.XtraBars.BarButtonItem btnRegisterCustomer;
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar1;
         private DevExpress.XtraBars.BarStaticItem barStaticItem2;
         private DevExpress.XtraBars.BarStaticItem barStaticItem4;
@@ -681,5 +702,6 @@
         private DevExpress.XtraBars.BarStaticItem barStaticItem8;
         private DevExpress.XtraBars.BarButtonItem btnSelectCounter;
         private DevExpress.XtraBars.BarButtonItem barButtonItem6;
+        private DevExpress.XtraGrid.Columns.GridColumn colCustomerName;
     }
 }

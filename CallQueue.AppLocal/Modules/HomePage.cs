@@ -14,6 +14,7 @@ using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 using DevExpress.Data;
 using DevExpress.XtraEditors.Controls;
+using CallQueue.AppLocal.Modules;
 
 namespace CallQueue.AppLocal
 {
@@ -90,6 +91,7 @@ namespace CallQueue.AppLocal
             lbQuayDangChon.Caption = "Quầy đang chọn: ";
         }
 
+        // Tìm method Refresh() trong HomePage.cs và cập nhật phần này:
         private void Refresh(object state)
         {
             try
@@ -114,6 +116,7 @@ namespace CallQueue.AppLocal
                             queueHistory.Mark = currentQueue.Mark;
                             queueHistory.NumberFormat = currentQueue.NumberFormat;
                             queueHistory.Piority = currentQueue.Piority;
+                            queueHistory.CustomerName = currentQueue.CustomerName; // Thêm dòng này
                             queueHistory.DisplayNumber = GetDisplayNumber(currentQueue.PrintedNumber, currentQueue.Mark, currentQueue.NumberFormat);
                         }
                         else
@@ -125,6 +128,7 @@ namespace CallQueue.AppLocal
                             queueHistory.Mark = currentQueue.Mark;
                             queueHistory.NumberFormat = currentQueue.NumberFormat;
                             queueHistory.Piority = currentQueue.Piority;
+                            queueHistory.CustomerName = currentQueue.CustomerName; // Thêm dòng này
                             queueHistory.DisplayNumber = GetDisplayNumber(currentQueue.PrintedNumber, currentQueue.Mark, currentQueue.NumberFormat);
                             QueueHistory.Add(queueHistory);
                         }
@@ -210,10 +214,21 @@ namespace CallQueue.AppLocal
         public List<QueueModel> GetQueueModels()
         {
             List<QueueModel> queueModels = new List<QueueModel>();
-
             try
             {
-                DataTable dt = unitOfWork.SQLHelper.ExecuteQuery($"call proc_getqueuehistory");
+                // Query đã sửa: PiorityLevel từ service, NumberFormat từ common, bỏ s.NumberFormat
+                string query = @"
+            SELECT q.DateTime, s.Name as ServiceName, s.PiorityLevel as Piority, s.Mark, 
+                   com.NumberFormat,
+                   q.Number as PrintedNumber, 
+                   COALESCE(q.customername, '') as CustomerName
+            FROM queue q 
+            INNER JOIN service s ON q.ServiceId = s.Id 
+            CROSS JOIN common com
+            ORDER BY q.DateTime DESC 
+            LIMIT 50";
+
+                DataTable dt = unitOfWork.SQLHelper.ExecuteQuery(query);
                 if (dt != null)
                 {
                     foreach (DataRow dtRow in dt.Rows)
@@ -223,8 +238,9 @@ namespace CallQueue.AppLocal
                         queueModel.ServiceName = dtRow["ServiceName"].ToString();
                         queueModel.Piority = dtRow["Piority"].ToString();
                         queueModel.Mark = dtRow["Mark"].ToString();
-                        queueModel.NumberFormat = dtRow["NumberFormat"].ToString();
+                        queueModel.NumberFormat = dtRow["NumberFormat"].ToString(); // Từ bảng common
                         queueModel.PrintedNumber = int.Parse(dtRow["PrintedNumber"].ToString());
+                        queueModel.CustomerName = dtRow["CustomerName"].ToString();
                         queueModels.Add(queueModel);
                     }
                 }
@@ -354,7 +370,7 @@ namespace CallQueue.AppLocal
                         }
                     }
 
-                  
+
 
                     if (parent.CallNext(counterId))
                     {
@@ -471,9 +487,115 @@ namespace CallQueue.AppLocal
                 ex.ShowErrorMessageBox();
             }
         }
-    }
+        private void btnRegisterCustomer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            try
+            {
+                frmCustomerRegistration frm = new frmCustomerRegistration();
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    // Lấy QueueManager từ IoC Container
+                    var queueManager = IoC.Instance.Get<QueueManager>();
 
-    public class QueueModel : INotifyPropertyChanged
+                    // Đăng ký khách hàng
+                    var result = queueManager.RegisterCustomer(frm.CustomerName, 1);
+
+                    if (result.Success)
+                    {
+                        string message = $"Đăng ký thành công!\n\n" +
+                                       $"Khách hàng: {result.CustomerName}\n" +
+                                       $"Số thứ tự: {result.QueueNumber:1000}\n\n" +
+                                       $"Vui lòng chờ được gọi!";
+
+                        MessageBox.Show(message, "Đăng Ký Thành Công",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        RefreshQueueDisplay();
+                        Console.WriteLine($"✅ Đăng ký thành công: {result.CustomerName} - Số {result.QueueNumber}");
+                    }
+                    else
+                    {
+                        MessageBox.Show(result.Message, "Lỗi Đăng Ký",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi Hệ Thống",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine($"❌ Lỗi đăng ký khách hàng: {ex}");
+            }
+        }
+
+        /// <summary>
+        /// Refresh danh sách hàng chờ sau khi đăng ký
+        /// </summary>
+        private void RefreshQueueDisplay()
+        {
+            try
+            {
+                // Cập nhật lại danh sách hiển thị bằng cách gọi lại method Refresh
+                var queueModels = GetQueueModels();
+                if (queueModels != null)
+                {
+                    // Cập nhật QueueHistory hiện tại
+                    for (int i = 0; i < queueModels.Count; i++)
+                    {
+                        var currentQueue = queueModels[i];
+                        if (i <= QueueHistory.Count - 1)
+                        {
+                            var queueHistory = QueueHistory[i];
+                            queueHistory.DateTime = currentQueue.DateTime;
+                            queueHistory.ServiceName = currentQueue.ServiceName;
+                            queueHistory.PrintedNumber = currentQueue.PrintedNumber;
+                            queueHistory.Mark = currentQueue.Mark;
+                            queueHistory.NumberFormat = currentQueue.NumberFormat;
+                            queueHistory.Piority = currentQueue.Piority;
+                            queueHistory.CustomerName = currentQueue.CustomerName; // Thêm dòng này
+                            queueHistory.DisplayNumber = GetDisplayNumber(currentQueue.PrintedNumber, currentQueue.Mark, currentQueue.NumberFormat);
+                        }
+                        else
+                        {
+                            var queueHistory = new QueueModel();
+                            queueHistory.DateTime = currentQueue.DateTime;
+                            queueHistory.ServiceName = currentQueue.ServiceName;
+                            queueHistory.PrintedNumber = currentQueue.PrintedNumber;
+                            queueHistory.Mark = currentQueue.Mark;
+                            queueHistory.NumberFormat = currentQueue.NumberFormat;
+                            queueHistory.Piority = currentQueue.Piority;
+                            queueHistory.CustomerName = currentQueue.CustomerName; // Thêm dòng này
+                            queueHistory.DisplayNumber = GetDisplayNumber(currentQueue.PrintedNumber, currentQueue.Mark, currentQueue.NumberFormat);
+                            QueueHistory.Add(queueHistory);
+                        }
+                    }
+
+                    // Xóa các items thừa nếu có
+                    if (queueModels.Count < QueueHistory.Count)
+                    {
+                        int count = QueueHistory.Count;
+                        for (int i = queueModels.Count; i < count; i++)
+                        {
+                            QueueHistory.RemoveAt(queueModels.Count);
+                        }
+                    }
+                }
+
+                // Cập nhật counter nếu có
+                if (beiCounter.EditValue != null)
+                {
+                    int counterId = Convert.ToInt32(beiCounter.EditValue);
+                    parent.DisplayCurrentQueueToHomePage(counterId);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"❌ Lỗi refresh queue display: {ex}");
+            }
+        }
+    }
+}
+public class QueueModel : INotifyPropertyChanged
     {
         string dateTime;
         string serviceName;
@@ -482,6 +604,7 @@ namespace CallQueue.AppLocal
         string mark;
         string numberFormat;
         string displayNumber;
+        string customerName; // Thêm field này
 
         public string DisplayNumber
         {
@@ -508,6 +631,7 @@ namespace CallQueue.AppLocal
                 }
             }
         }
+
         public string ServiceName
         {
             get { return serviceName; }
@@ -520,6 +644,7 @@ namespace CallQueue.AppLocal
                 }
             }
         }
+
         public int PrintedNumber
         {
             get { return printedNumber; }
@@ -532,6 +657,7 @@ namespace CallQueue.AppLocal
                 }
             }
         }
+
         public string Piority
         {
             get { return piority; }
@@ -544,6 +670,7 @@ namespace CallQueue.AppLocal
                 }
             }
         }
+
         public string Mark
         {
             get { return mark; }
@@ -556,6 +683,7 @@ namespace CallQueue.AppLocal
                 }
             }
         }
+
         public string NumberFormat
         {
             get { return numberFormat; }
@@ -569,10 +697,24 @@ namespace CallQueue.AppLocal
             }
         }
 
+        // ===== THÊM PROPERTY CustomerName =====
+        public string CustomerName
+        {
+            get { return customerName; }
+            set
+            {
+                if (value != customerName)
+                {
+                    customerName = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
         public void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
     }
-}
