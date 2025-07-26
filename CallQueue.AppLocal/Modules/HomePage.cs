@@ -511,6 +511,7 @@ namespace CallQueue.AppLocal
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         RefreshQueueDisplay();
+                        parent.OnCustomerRegistered(result.CustomerName, result.QueueNumber, 1);
                         Console.WriteLine($"✅ Đăng ký thành công: {result.CustomerName} - Số {result.QueueNumber}");
                     }
                     else
@@ -593,6 +594,7 @@ namespace CallQueue.AppLocal
                 Debug.WriteLine($"❌ Lỗi refresh queue display: {ex}");
             }
         }
+        
     }
 }
 public class QueueModel : INotifyPropertyChanged

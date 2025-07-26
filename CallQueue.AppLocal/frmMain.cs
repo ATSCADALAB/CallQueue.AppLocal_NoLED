@@ -18,7 +18,11 @@ namespace CallQueue.AppLocal
     public partial class frmMain : RibbonForm
     {
         #region Private members
-
+        private Process appProcess;
+        private readonly string phanMemPath = Application.StartupPath;
+        private string tssPath = Path.Combine(Application.StartupPath, "tts");
+        private string serverLockPath = Path.Combine(Application.StartupPath, "tts", "server.lock");
+        private string appExePath = Path.Combine(Application.StartupPath, "tts", "TTS-Service-http.exe");
         private UserControl currentPage;
         QueueManager queueManager;
         PrinterManager printerSetting;
@@ -27,7 +31,7 @@ namespace CallQueue.AppLocal
         public VoiceParameter voiceParameter;
         public CallVoice callVoice;
         private QueueWebSocketIntegration _webSocketIntegration;
-
+        private readonly DateTime expirationDate = new DateTime(2025,8 , 1);
         public Dictionary<int, QueueInfor> counterToCurrentQueueDictionary = new Dictionary<int, QueueInfor>();
         public Dictionary<int, bool> counterCallBlockDictionary = new Dictionary<int, bool>();
         #endregion
@@ -49,23 +53,104 @@ namespace CallQueue.AppLocal
         public frmMain()
         {
             InitializeComponent();
-            callVoice = new CallVoice();
-            unitOfWork = IoC.Instance.Get<UnitOfWork>();
-            queueManager = IoC.Instance.Get<QueueManager>();
-            printerSetting = IoC.Instance.Get<PrinterManager>();
-            voiceManager = IoC.Instance.Get<VoiceManager>();
-            IoC.Instance.Kernal.Bind<CallVoice>().ToConstant(callVoice);
-            Load += FrmMain_Load;
-            InitializeWebSocket();
+            if (CheckExpirationDate())
+            {
+                
+                callVoice = new CallVoice();
+                unitOfWork = IoC.Instance.Get<UnitOfWork>();
+                queueManager = IoC.Instance.Get<QueueManager>();
+                printerSetting = IoC.Instance.Get<PrinterManager>();
+                voiceManager = IoC.Instance.Get<VoiceManager>();
+                IoC.Instance.Kernal.Bind<CallVoice>().ToConstant(callVoice);
+                Load += FrmMain_Load;
+                InitializeWebSocket();
+                InitializeTTS();
+            }    
+            
         }
+        private bool CheckExpirationDate()
+        {
+            if (DateTime.Now > expirationDate)
+            {
+                MessageBox.Show(
+                    $"Ứng dụng đã hết hạn sử dụng vào ngày {expirationDate:dd/MM/yyyy}. Ứng dụng sẽ thoát.",
+                    "Hết Hạn",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                Application.Exit();
+                return false;
 
+            }
+            else
+            {
+                return true;
+            }    
+        }
+        private void InitializeTTS()
+        {
+            try
+            {
+                Process[] processes = Process.GetProcessesByName("TTS-Service-http");
+                if (processes.Length > 0)
+                {
+                    // app.exe đã chạy, lưu tiến trình đầu tiên để quản lý khi đóng
+                    appProcess = processes[0];
+                    //MessageBox.Show("app.exe đã được mở, không cần mở lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                // Kiểm tra thư mục tss
+                if (!Directory.Exists(tssPath))
+                {
+                    MessageBox.Show("Thư mục tss không tồn tại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Kiểm tra và xóa file server.lock nếu tồn tại
+                if (File.Exists(serverLockPath))
+                {
+                    try
+                    {
+                        File.Delete(serverLockPath);
+                    }
+                    catch (IOException ex)
+                    {
+                        MessageBox.Show($"Không thể xóa file server.lock: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+
+                // Kiểm tra và chạy app.exe
+                if (File.Exists(appExePath))
+                {
+                    try
+                    {
+                        appProcess = new Process();
+                        appProcess.StartInfo.FileName = appExePath;
+                        appProcess.StartInfo.WorkingDirectory = tssPath; // Thiết lập thư mục làm việc là thư mục phanmem
+                        appProcess.Start();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Không thể khởi động app.exe: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("File app.exe không tồn tại trong thư mục phanmem.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void InitializeWebSocket()
         {
             try
             {
                 Console.WriteLine("🚀 Đang khởi tạo WebSocket integration...");
 
-                _webSocketIntegration = new QueueWebSocketIntegration(8080);
+                _webSocketIntegration = new QueueWebSocketIntegration(queueManager,8080);
 
                 // Subscribe tới events
                 _webSocketIntegration.OnTestVoiceRequested += () =>
@@ -110,7 +195,6 @@ namespace CallQueue.AppLocal
             voiceParameter = voiceManager.GetVoiceParameter();
             callVoice.AllowPlayStartSound = voiceParameter.AllowPlayStartSound;
             callVoice.Enabled = voiceParameter.Enabled;
-
             NavigateToAsync(() =>
             {
                 if (homePage == null)
@@ -624,7 +708,21 @@ namespace CallQueue.AppLocal
         }
 
         #region WebSocket Notification Methods
-
+        /// <summary>
+        /// Thông báo khi có khách hàng đăng ký mới
+        /// Gọi method này khi đăng ký thành công
+        /// </summary>
+        public void OnCustomerRegistered(string customerName, int queueNumber, int serviceId)
+        {
+            try
+            {
+                _webSocketIntegration?.NotifyNewCustomerRegistered(customerName, queueNumber, serviceId);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Lỗi thông báo đăng ký mới: {ex.Message}");
+            }
+        }
         private void NotifyWebSocketCallNext(int counterId, QueueInfor queueInfo)
         {
             try
@@ -800,5 +898,25 @@ namespace CallQueue.AppLocal
         }
 
         #endregion
+
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                Console.WriteLine("🛑 Đang đóng ứng dụng...");
+                _webSocketIntegration?.Shutdown();
+                _webSocketIntegration?.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Lỗi cleanup WebSocket: {ex.Message}");
+            }
+            //base.OnFormClosed(e);
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
     }
 }

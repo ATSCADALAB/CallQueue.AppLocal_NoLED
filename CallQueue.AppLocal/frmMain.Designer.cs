@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            DevExpress.Utils.Animation.Transition transition1 = new DevExpress.Utils.Animation.Transition();
-            DevExpress.Utils.Animation.FadeTransition fadeTransition1 = new DevExpress.Utils.Animation.FadeTransition();
+            DevExpress.Utils.Animation.Transition transition3 = new DevExpress.Utils.Animation.Transition();
+            DevExpress.Utils.Animation.FadeTransition fadeTransition3 = new DevExpress.Utils.Animation.FadeTransition();
             this.containerControl = new DevExpress.XtraEditors.XtraUserControl();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.skinPaletteRibbonGalleryBarItem1 = new DevExpress.XtraBars.SkinPaletteRibbonGalleryBarItem();
@@ -52,10 +52,8 @@
             this.aceCounter = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.aceCallhistory = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.accordionControlSeparator1 = new DevExpress.XtraBars.Navigation.AccordionControlSeparator();
-            //this.acSettings = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.aceVoiceContent = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.acePrintContent = new DevExpress.XtraBars.Navigation.AccordionControlElement();
-            //this.aceModbusConfig = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.transitionManager = new DevExpress.Utils.Animation.TransitionManager(this.components);
             this.ribbonPage5 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -179,7 +177,6 @@
             this.accordionControl1.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
             this.acManager,
             this.accordionControlSeparator1});
-            //this.acSettings});
             this.accordionControl1.Location = new System.Drawing.Point(0, 156);
             this.accordionControl1.Name = "accordionControl1";
             this.accordionControl1.RootDisplayMode = DevExpress.XtraBars.Navigation.AccordionControlRootDisplayMode.Footer;
@@ -234,16 +231,6 @@
             // 
             this.accordionControlSeparator1.Name = "accordionControlSeparator1";
             // 
-            // acSettings
-            // 
-            //this.acSettings.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
-            //this.aceVoiceContent,
-            //this.acePrintContent});
-            //this.acSettings.Expanded = true;
-            //this.acSettings.ImageOptions.Image = global::CallQueue.AppLocal.Properties.Resources.properties_32x32;
-            //this.acSettings.Name = "acSettings";
-            //this.acSettings.Text = "Cài đặt";
-            // 
             // aceVoiceContent
             // 
             this.aceVoiceContent.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("aceVoiceContent.ImageOptions.Image")));
@@ -262,32 +249,24 @@
             this.acePrintContent.Text = "Nội dung in";
             this.acePrintContent.Click += new System.EventHandler(this.acePrintContent_Click);
             // 
-            // aceModbusConfig
-            // 
-            //this.aceModbusConfig.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("aceModbusConfig.ImageOptions.Image")));
-            //this.aceModbusConfig.Name = "aceModbusConfig";
-            //this.aceModbusConfig.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
-            //this.aceModbusConfig.Text = "Cấu hình kết nối";
-            //this.aceModbusConfig.Click += new System.EventHandler(this.aceModbusConfig_Click);
-            // 
             // transitionManager
             // 
             this.transitionManager.FrameCount = 0;
             this.transitionManager.FrameInterval = 0;
-            transition1.BarWaitingIndicatorProperties.AllowBackground = false;
-            transition1.BarWaitingIndicatorProperties.Caption = "";
-            transition1.BarWaitingIndicatorProperties.Description = "";
-            transition1.Control = this.containerControl;
-            transition1.LineWaitingIndicatorProperties.AnimationElementCount = 5;
-            transition1.LineWaitingIndicatorProperties.Caption = "";
-            transition1.LineWaitingIndicatorProperties.Description = "";
-            transition1.RingWaitingIndicatorProperties.AnimationElementCount = 5;
-            transition1.RingWaitingIndicatorProperties.Caption = "";
-            transition1.RingWaitingIndicatorProperties.Description = "";
-            transition1.TransitionType = fadeTransition1;
-            transition1.WaitingIndicatorProperties.Caption = "";
-            transition1.WaitingIndicatorProperties.Description = "";
-            this.transitionManager.Transitions.Add(transition1);
+            transition3.BarWaitingIndicatorProperties.AllowBackground = false;
+            transition3.BarWaitingIndicatorProperties.Caption = "";
+            transition3.BarWaitingIndicatorProperties.Description = "";
+            transition3.Control = this.containerControl;
+            transition3.LineWaitingIndicatorProperties.AnimationElementCount = 5;
+            transition3.LineWaitingIndicatorProperties.Caption = "";
+            transition3.LineWaitingIndicatorProperties.Description = "";
+            transition3.RingWaitingIndicatorProperties.AnimationElementCount = 5;
+            transition3.RingWaitingIndicatorProperties.Caption = "";
+            transition3.RingWaitingIndicatorProperties.Description = "";
+            transition3.TransitionType = fadeTransition3;
+            transition3.WaitingIndicatorProperties.Caption = "";
+            transition3.WaitingIndicatorProperties.Description = "";
+            this.transitionManager.Transitions.Add(transition3);
             // 
             // ribbonPage5
             // 
@@ -346,6 +325,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.StatusBar = this.ribbonStatusBar1;
             this.Text = "PHẦN MỀM GỌI SỐ THỨ TỰ - ATPRO";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

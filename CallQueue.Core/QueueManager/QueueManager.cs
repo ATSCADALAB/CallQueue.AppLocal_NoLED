@@ -231,13 +231,12 @@ namespace CallQueue.Core
             try
             {
                 string query = $@"
-                    SELECT q.Id, q.DateTime, q.Number, q.ServiceId, 
-                           COALESCE(q.customername, '') as CustomerName,
-                           s.Mark, s.NumberFormat, s.CallVoiceContent
-                    FROM queue q 
-                    INNER JOIN service s ON q.ServiceId = s.Id 
-                    WHERE q.ServiceId = {serviceId} 
-                    ORDER BY q.DateTime ASC";
+           SELECT q.DateTime, 
+                  COALESCE(q.customername, '') as CustomerName,
+                  q.Number
+           FROM queue q 
+           WHERE q.ServiceId = {serviceId} 
+           ORDER BY q.DateTime ASC";
 
                 DataTable dt = sqlHelper.ExecuteQuery(query);
                 var queueList = new List<QueueInfor>();
@@ -248,19 +247,20 @@ namespace CallQueue.Core
                     {
                         var queue = new QueueInfor
                         {
-                            Id = Convert.ToInt32(row["Id"]),
                             DateTime = Convert.ToDateTime(row["DateTime"]),
+                            CustomerName = row["CustomerName"]?.ToString() ?? "",
                             Number = Convert.ToInt32(row["Number"]),
-                            ServiceId = Convert.ToInt32(row["ServiceId"]),
-                            Mark = row["Mark"]?.ToString() ?? "",
-                            NumberFormat = row["NumberFormat"]?.ToString() ?? "",
-                            CallVoiceContent = row["CallVoiceContent"]?.ToString() ?? "",
-                            CustomerName = row["CustomerName"]?.ToString() ?? ""
+
+                            // Các trường không có trong query set null
+                            Id = 0,
+                            ServiceId = 0,
+                            Mark = null,
+                            NumberFormat = null,
+                            CallVoiceContent = null
                         };
                         queueList.Add(queue);
                     }
                 }
-
                 return queueList;
             }
             catch (Exception ex)
