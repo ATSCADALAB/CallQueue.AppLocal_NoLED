@@ -38,7 +38,7 @@ namespace CallQueue.AppLocal.WebSocket
         public QueueWebSocketServer(int port = 8080)
         {
             _port = port;
-            _location = string.Format("ws://192.168.1.100:{0}", port);
+            _location = string.Format("ws://192.168.1.26:{0}", port);
             _connections = new Dictionary<Guid, IWebSocketConnection>();
             _clientInfos = new Dictionary<Guid, ClientInfo>();
         }
