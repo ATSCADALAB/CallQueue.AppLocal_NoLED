@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            DevExpress.Utils.Animation.Transition transition3 = new DevExpress.Utils.Animation.Transition();
-            DevExpress.Utils.Animation.FadeTransition fadeTransition3 = new DevExpress.Utils.Animation.FadeTransition();
+            DevExpress.Utils.Animation.Transition transition1 = new DevExpress.Utils.Animation.Transition();
+            DevExpress.Utils.Animation.FadeTransition fadeTransition1 = new DevExpress.Utils.Animation.FadeTransition();
             this.containerControl = new DevExpress.XtraEditors.XtraUserControl();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.skinPaletteRibbonGalleryBarItem1 = new DevExpress.XtraBars.SkinPaletteRibbonGalleryBarItem();
@@ -253,20 +253,20 @@
             // 
             this.transitionManager.FrameCount = 0;
             this.transitionManager.FrameInterval = 0;
-            transition3.BarWaitingIndicatorProperties.AllowBackground = false;
-            transition3.BarWaitingIndicatorProperties.Caption = "";
-            transition3.BarWaitingIndicatorProperties.Description = "";
-            transition3.Control = this.containerControl;
-            transition3.LineWaitingIndicatorProperties.AnimationElementCount = 5;
-            transition3.LineWaitingIndicatorProperties.Caption = "";
-            transition3.LineWaitingIndicatorProperties.Description = "";
-            transition3.RingWaitingIndicatorProperties.AnimationElementCount = 5;
-            transition3.RingWaitingIndicatorProperties.Caption = "";
-            transition3.RingWaitingIndicatorProperties.Description = "";
-            transition3.TransitionType = fadeTransition3;
-            transition3.WaitingIndicatorProperties.Caption = "";
-            transition3.WaitingIndicatorProperties.Description = "";
-            this.transitionManager.Transitions.Add(transition3);
+            transition1.BarWaitingIndicatorProperties.AllowBackground = false;
+            transition1.BarWaitingIndicatorProperties.Caption = "";
+            transition1.BarWaitingIndicatorProperties.Description = "";
+            transition1.Control = this.containerControl;
+            transition1.LineWaitingIndicatorProperties.AnimationElementCount = 5;
+            transition1.LineWaitingIndicatorProperties.Caption = "";
+            transition1.LineWaitingIndicatorProperties.Description = "";
+            transition1.RingWaitingIndicatorProperties.AnimationElementCount = 5;
+            transition1.RingWaitingIndicatorProperties.Caption = "";
+            transition1.RingWaitingIndicatorProperties.Description = "";
+            transition1.TransitionType = fadeTransition1;
+            transition1.WaitingIndicatorProperties.Caption = "";
+            transition1.WaitingIndicatorProperties.Description = "";
+            this.transitionManager.Transitions.Add(transition1);
             // 
             // ribbonPage5
             // 

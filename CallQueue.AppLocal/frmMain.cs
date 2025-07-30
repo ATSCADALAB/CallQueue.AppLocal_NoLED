@@ -169,7 +169,10 @@ namespace CallQueue.AppLocal
                     var message = string.Format("❌ Web client ngắt kết nối: {0}", clientInfo.Id);
                     Console.WriteLine(message);
                 };
-
+                if (_webSocketIntegration.WebSocketServer != null)
+                {
+                    _webSocketIntegration.WebSocketServer.OnRoomStatusChanged += OnRoomStatusChanged;
+                }
                 // Khởi tạo WebSocket
                 if (_webSocketIntegration.Initialize())
                 {
@@ -187,7 +190,43 @@ namespace CallQueue.AppLocal
                 Debug.WriteLine("WebSocket initialization error: " + ex.ToString());
             }
         }
+        private void OnRoomStatusChanged(int counterId, string status)
+        {
+            try
+            {
+                // Update trên UI thread
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new Action(() => UpdateRoomStatus(counterId, status)));
+                }
+                else
+                {
+                    UpdateRoomStatus(counterId, status);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error handling room status change: {ex.Message}");
+            }
+        }
+        private void UpdateRoomStatus(int counterId, string status)
+        {
+            try
+            {
+                // Update trong HomePage nếu đang hiển thị
+                if (homePage != null)
+                {
+                    homePage.UpdateRoomStatus(counterId, status);
+                }
 
+                // Log
+                Console.WriteLine($"Room {counterId} status updated to: {status}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating room status: {ex.Message}");
+            }
+        }
         private void FrmMain_Load(object sender, EventArgs e)
         {
             Reset();
@@ -200,8 +239,15 @@ namespace CallQueue.AppLocal
                 if (homePage == null)
                     homePage = new HomePage(unitOfWork, this);
                 return homePage;
+            }, () =>
+            {
+                // Callback sau khi load HomePage
+                // Khởi tạo room statuses
+                if (homePage != null && _webSocketIntegration?.WebSocketServer != null)
+                {
+                    homePage.InitializeRoomStatuses(_webSocketIntegration.WebSocketServer);
+                }
             });
-
 
             foreach (var counter in unitOfWork.CounterRepository.GetAll())
             {
@@ -904,6 +950,11 @@ namespace CallQueue.AppLocal
             try
             {
                 Console.WriteLine("🛑 Đang đóng ứng dụng...");
+                // Unsubscribe events
+                if (_webSocketIntegration?.WebSocketServer != null)
+                {
+                    _webSocketIntegration.WebSocketServer.OnRoomStatusChanged -= OnRoomStatusChanged;
+                }
                 _webSocketIntegration?.Shutdown();
                 _webSocketIntegration?.Dispose();
             }

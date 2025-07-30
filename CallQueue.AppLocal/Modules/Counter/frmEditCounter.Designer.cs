@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.XtraBars.BarShortcut barShortcut1 = new DevExpress.XtraBars.BarShortcut();
+            DevExpress.XtraBars.BarShortcut barShortcut2 = new DevExpress.XtraBars.BarShortcut();
+            DevExpress.XtraBars.BarShortcut barShortcut3 = new DevExpress.XtraBars.BarShortcut();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEditCounter));
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.btnSave = new DevExpress.XtraBars.BarButtonItem();
@@ -66,6 +69,9 @@
             // 
             // ribbonControl1
             // 
+            // 
+            // 
+            // 
             this.ribbonControl1.ExpandCollapseItem.Id = 0;
             this.ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbonControl1.ExpandCollapseItem,
@@ -89,7 +95,7 @@
             this.btnSave.Id = 1;
             this.btnSave.ImageOptions.Image = global::CallQueue.AppLocal.Properties.Resources.save_16x161;
             this.btnSave.ImageOptions.LargeImage = global::CallQueue.AppLocal.Properties.Resources.save_32x321;
-            this.btnSave.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S));
+            this.btnSave.ItemShortcut = barShortcut1;
             this.btnSave.Name = "btnSave";
             // 
             // btnSaveAndClose
@@ -106,7 +112,7 @@
             this.btnRestore.Id = 5;
             this.btnRestore.ImageOptions.Image = global::CallQueue.AppLocal.Properties.Resources.reset2_16x161;
             this.btnRestore.ImageOptions.LargeImage = global::CallQueue.AppLocal.Properties.Resources.reset2_32x321;
-            this.btnRestore.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R));
+            this.btnRestore.ItemShortcut = barShortcut2;
             this.btnRestore.Name = "btnRestore";
             // 
             // btnClose
@@ -115,7 +121,7 @@
             this.btnClose.Id = 6;
             this.btnClose.ImageOptions.Image = global::CallQueue.AppLocal.Properties.Resources.close_16x16;
             this.btnClose.ImageOptions.LargeImage = global::CallQueue.AppLocal.Properties.Resources.close_32x32;
-            this.btnClose.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4));
+            this.btnClose.ItemShortcut = barShortcut3;
             this.btnClose.Name = "btnClose";
             // 
             // btnClearAllServices
@@ -143,12 +149,6 @@
             // 
             // ribbonPageGroup1
             // 
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnSave);
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnSaveAndClose);
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnRestore);
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnClose);
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnClearAllServices);
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnSelectAllService);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "Action";
             // 
@@ -191,6 +191,9 @@
             this.txbId.Location = new System.Drawing.Point(91, 12);
             this.txbId.MenuManager = this.ribbonControl1;
             this.txbId.Name = "txbId";
+            // 
+            // 
+            // 
             this.txbId.Properties.ReadOnly = true;
             this.txbId.Size = new System.Drawing.Size(90, 20);
             this.txbId.StyleController = this.layoutControl1;
@@ -211,6 +214,9 @@
             this.cobVoice.Location = new System.Drawing.Point(582, 12);
             this.cobVoice.MenuManager = this.ribbonControl1;
             this.cobVoice.Name = "cobVoice";
+            // 
+            // 
+            // 
             this.cobVoice.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cobVoice.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});

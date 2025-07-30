@@ -1,6 +1,4 @@
-﻿// Bước 3: Tạo file QueueWebSocketServer.cs trong thư mục WebSocket/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
@@ -25,11 +23,15 @@ namespace CallQueue.AppLocal.WebSocket
         private readonly Dictionary<Guid, IWebSocketConnection> _connections;
         private readonly Dictionary<Guid, ClientInfo> _clientInfos;
 
+        // Dictionary để lưu trạng thái phòng
+        private readonly Dictionary<int, string> _roomStatuses;
+
         // Events cho WinForms subscribe
         public event Action OnTestVoiceRequested;
         public event Func<WebSocketMessage> GetCurrentStatus;
         public event Action<ClientInfo> OnClientConnected;
         public event Action<ClientInfo> OnClientDisconnected;
+        public event Action<int, string> OnRoomStatusChanged;
 
         /// <summary>
         /// Constructor
@@ -38,9 +40,10 @@ namespace CallQueue.AppLocal.WebSocket
         public QueueWebSocketServer(int port = 8080)
         {
             _port = port;
-            _location = string.Format("ws://192.168.1.26:{0}", port);
+            _location = string.Format("ws://192.168.1.113:{0}", port);
             _connections = new Dictionary<Guid, IWebSocketConnection>();
             _clientInfos = new Dictionary<Guid, ClientInfo>();
+            _roomStatuses = new Dictionary<int, string>();
         }
 
         /// <summary>
@@ -248,6 +251,10 @@ namespace CallQueue.AppLocal.WebSocket
                     HandleTestVoice();
                     break;
 
+                case "room_status":
+                    HandleRoomStatus(socket, message);
+                    break;
+
                 default:
                     Console.WriteLine("Unknown message type: " + message.Type);
                     break;
@@ -295,6 +302,35 @@ namespace CallQueue.AppLocal.WebSocket
             catch (Exception ex)
             {
                 Console.WriteLine("Error handling test voice: " + ex.Message);
+            }
+        }
+
+        private void HandleRoomStatus(IWebSocketConnection socket, WebSocketMessage message)
+        {
+            try
+            {
+                // Parse data từ message
+                dynamic data = message.Data;
+                int counterId = Convert.ToInt32(data.counterId);
+                string status = data.status?.ToString() ?? "unknown";
+
+                // Lưu status
+                lock (_lockObject)
+                {
+                    _roomStatuses[counterId] = status;
+                }
+
+                var logMessage = string.Format("Room {0} status updated: {1}", counterId, status);
+                Console.WriteLine(logMessage);
+                Debug.WriteLine(logMessage);
+
+                // Broadcast status update cho tất cả clients
+                BroadcastRoomStatus(counterId, status);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error handling room status: " + ex.Message);
+                SendErrorToClient(socket, "Failed to update room status");
             }
         }
 
@@ -394,6 +430,61 @@ namespace CallQueue.AppLocal.WebSocket
         }
 
         // ====================================================================================
+        // Room Status Methods
+        // ====================================================================================
+
+        public void BroadcastRoomStatus(int counterId, string status)
+        {
+            try
+            {
+                var data = new
+                {
+                    CounterId = counterId,
+                    Status = status,
+                    IsAvailable = (status == "available"),
+                    UpdateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                    Message = string.Format("Phòng {0} {1}", counterId,
+                        status == "available" ? "đang trống" : "đang bận")
+                };
+
+                var message = new WebSocketMessage
+                {
+                    Type = "room_status_update",
+                    Data = data
+                };
+
+                BroadcastToAll(message);
+
+                var logMsg = string.Format("Broadcasted room status: Counter {0} is {1}",
+                    counterId, status);
+                Console.WriteLine(logMsg);
+
+                // Trigger event cho WinForm cập nhật UI
+                OnRoomStatusChanged?.Invoke(counterId, status);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error broadcasting room status: " + ex.Message);
+            }
+        }
+
+        public string GetRoomStatus(int counterId)
+        {
+            lock (_lockObject)
+            {
+                return _roomStatuses.ContainsKey(counterId) ? _roomStatuses[counterId] : "unknown";
+            }
+        }
+
+        public Dictionary<int, string> GetAllRoomStatuses()
+        {
+            lock (_lockObject)
+            {
+                return new Dictionary<int, string>(_roomStatuses);
+            }
+        }
+
+        // ====================================================================================
         // Broadcast Methods cho Queue Actions
         // ====================================================================================
 
@@ -412,7 +503,7 @@ namespace CallQueue.AppLocal.WebSocket
                     ServiceName = serviceName ?? "Unknown Service",
                     DisplayNumber = displayNumber ?? currentNumber.ToString().PadLeft(3, '0'),
                     Message = string.Format("Đã gọi số {0} tại {1}", currentNumber, counterName),
-                    CustomerName= customerName
+                    CustomerName = customerName
                 };
 
                 var message = new WebSocketMessage
@@ -510,7 +601,7 @@ namespace CallQueue.AppLocal.WebSocket
                     DisplayNumber = displayNumber ?? priorityNumber.ToString().PadLeft(3, '0'),
                     Priority = PriorityLevels.High,
                     Message = string.Format("Đã gọi ưu tiên số {0} tại {1}", priorityNumber, counterName),
-                    CustomerName= customerName
+                    CustomerName = customerName
                 };
 
                 var message = new WebSocketMessage

@@ -486,7 +486,7 @@
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(290, 533);
             this.groupControl1.TabIndex = 4;
-            this.groupControl1.Text = "DANH SÁCH CÁC QUẦY";
+            this.groupControl1.Text = "DANH SÁCH CÁC PHÒNG";
             // 
             // flpCounter
             // 

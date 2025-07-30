@@ -15,6 +15,7 @@ using System.Collections.ObjectModel;
 using DevExpress.Data;
 using DevExpress.XtraEditors.Controls;
 using CallQueue.AppLocal.Modules;
+using CallQueue.AppLocal.WebSocket;
 
 namespace CallQueue.AppLocal
 {
@@ -260,7 +261,49 @@ namespace CallQueue.AppLocal
             number = number.Insert(0, mark);
             return number;
         }
+        public void InitializeRoomStatuses(QueueWebSocketServer webSocketServer)
+        {
+            try
+            {
+                if (webSocketServer != null)
+                {
+                    var allStatuses = webSocketServer.GetAllRoomStatuses();
 
+                    foreach (var kvp in allStatuses)
+                    {
+                        UpdateRoomStatus(kvp.Key, kvp.Value);
+                    }
+
+                    Console.WriteLine($"Initialized {allStatuses.Count} room statuses");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error initializing room statuses: {ex.Message}");
+            }
+        }
+        public void UpdateRoomStatus(int counterId, string status)
+        {
+            try
+            {
+                if (counterDashboardDictionary.ContainsKey(counterId))
+                {
+                    counterDashboardDictionary[counterId].UpdateRoomStatus(status);
+
+                    // Log để debug
+                    Console.WriteLine($"Updated room status for Counter {counterId}: {status}");
+                }
+                else
+                {
+                    Console.WriteLine($"Counter {counterId} not found in dashboard dictionary");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating room status: {ex.Message}");
+                Debug.WriteLine($"UpdateRoomStatus error: {ex}");
+            }
+        }
         private void btnPiorityCall_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             try
@@ -504,7 +547,7 @@ namespace CallQueue.AppLocal
                     {
                         string message = $"Đăng ký thành công!\n\n" +
                                        $"Khách hàng: {result.CustomerName}\n" +
-                                       $"Số thứ tự: {result.QueueNumber:1000}\n\n" +
+                                       $"Số thứ tự: {result.QueueNumber:100}\n\n" +
                                        $"Vui lòng chờ được gọi!";
 
                         MessageBox.Show(message, "Đăng Ký Thành Công",

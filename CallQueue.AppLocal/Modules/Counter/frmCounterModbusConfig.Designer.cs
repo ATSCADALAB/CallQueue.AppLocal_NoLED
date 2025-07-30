@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.XtraBars.BarShortcut barShortcut1 = new DevExpress.XtraBars.BarShortcut();
+            DevExpress.XtraBars.BarShortcut barShortcut2 = new DevExpress.XtraBars.BarShortcut();
+            DevExpress.XtraBars.BarShortcut barShortcut3 = new DevExpress.XtraBars.BarShortcut();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCounterModbusConfig));
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.btnSave = new DevExpress.XtraBars.BarButtonItem();
@@ -150,6 +153,9 @@
             // 
             // ribbonControl1
             // 
+            // 
+            // 
+            // 
             this.ribbonControl1.ExpandCollapseItem.Id = 0;
             this.ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbonControl1.ExpandCollapseItem,
@@ -171,7 +177,7 @@
             this.btnSave.Id = 1;
             this.btnSave.ImageOptions.Image = global::CallQueue.AppLocal.Properties.Resources.save_16x161;
             this.btnSave.ImageOptions.LargeImage = global::CallQueue.AppLocal.Properties.Resources.save_32x321;
-            this.btnSave.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S));
+            this.btnSave.ItemShortcut = barShortcut1;
             this.btnSave.Name = "btnSave";
             // 
             // btnSaveAndClose
@@ -188,7 +194,7 @@
             this.btnRestore.Id = 5;
             this.btnRestore.ImageOptions.Image = global::CallQueue.AppLocal.Properties.Resources.reset2_16x161;
             this.btnRestore.ImageOptions.LargeImage = global::CallQueue.AppLocal.Properties.Resources.reset2_32x321;
-            this.btnRestore.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R));
+            this.btnRestore.ItemShortcut = barShortcut2;
             this.btnRestore.Name = "btnRestore";
             // 
             // btnClose
@@ -197,7 +203,7 @@
             this.btnClose.Id = 6;
             this.btnClose.ImageOptions.Image = global::CallQueue.AppLocal.Properties.Resources.close_16x16;
             this.btnClose.ImageOptions.LargeImage = global::CallQueue.AppLocal.Properties.Resources.close_32x32;
-            this.btnClose.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4));
+            this.btnClose.ItemShortcut = barShortcut3;
             this.btnClose.Name = "btnClose";
             // 
             // ribbonPage1
@@ -209,10 +215,6 @@
             // 
             // ribbonPageGroup1
             // 
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnSave);
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnSaveAndClose);
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnRestore);
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnClose);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "Action";
             // 
@@ -263,6 +265,9 @@
             this.txbPortLed.Location = new System.Drawing.Point(12, 185);
             this.txbPortLed.MenuManager = this.ribbonControl1;
             this.txbPortLed.Name = "txbPortLed";
+            // 
+            // 
+            // 
             this.txbPortLed.Properties.ReadOnly = true;
             this.txbPortLed.Size = new System.Drawing.Size(152, 20);
             this.txbPortLed.StyleController = this.layoutControl1;
@@ -273,6 +278,9 @@
             this.lokModbusMasterLed.Location = new System.Drawing.Point(140, 143);
             this.lokModbusMasterLed.MenuManager = this.ribbonControl1;
             this.lokModbusMasterLed.Name = "lokModbusMasterLed";
+            // 
+            // 
+            // 
             this.lokModbusMasterLed.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.lokModbusMasterLed.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
@@ -290,6 +298,9 @@
             this.lokModbusMasterKeyboard.Location = new System.Drawing.Point(140, 37);
             this.lokModbusMasterKeyboard.MenuManager = this.ribbonControl1;
             this.lokModbusMasterKeyboard.Name = "lokModbusMasterKeyboard";
+            // 
+            // 
+            // 
             this.lokModbusMasterKeyboard.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.lokModbusMasterKeyboard.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
@@ -307,6 +318,9 @@
             this.txbId.Location = new System.Drawing.Point(140, 12);
             this.txbId.MenuManager = this.ribbonControl1;
             this.txbId.Name = "txbId";
+            // 
+            // 
+            // 
             this.txbId.Properties.ReadOnly = true;
             this.txbId.Size = new System.Drawing.Size(258, 20);
             this.txbId.StyleController = this.layoutControl1;
@@ -317,6 +331,9 @@
             this.txbName.Location = new System.Drawing.Point(530, 12);
             this.txbName.MenuManager = this.ribbonControl1;
             this.txbName.Name = "txbName";
+            // 
+            // 
+            // 
             this.txbName.Properties.ReadOnly = true;
             this.txbName.Size = new System.Drawing.Size(258, 20);
             this.txbName.StyleController = this.layoutControl1;
@@ -327,6 +344,9 @@
             this.txbPortKeyboard.Location = new System.Drawing.Point(12, 78);
             this.txbPortKeyboard.MenuManager = this.ribbonControl1;
             this.txbPortKeyboard.Name = "txbPortKeyboard";
+            // 
+            // 
+            // 
             this.txbPortKeyboard.Properties.ReadOnly = true;
             this.txbPortKeyboard.Size = new System.Drawing.Size(152, 20);
             this.txbPortKeyboard.StyleController = this.layoutControl1;
@@ -338,6 +358,9 @@
             this.txbBaudrateKeyboard.Location = new System.Drawing.Point(168, 78);
             this.txbBaudrateKeyboard.MenuManager = this.ribbonControl1;
             this.txbBaudrateKeyboard.Name = "txbBaudrateKeyboard";
+            // 
+            // 
+            // 
             this.txbBaudrateKeyboard.Properties.ReadOnly = true;
             this.txbBaudrateKeyboard.Size = new System.Drawing.Size(152, 20);
             this.txbBaudrateKeyboard.StyleController = this.layoutControl1;
@@ -348,6 +371,9 @@
             this.txbDataBitsKeyboard.Location = new System.Drawing.Point(324, 78);
             this.txbDataBitsKeyboard.MenuManager = this.ribbonControl1;
             this.txbDataBitsKeyboard.Name = "txbDataBitsKeyboard";
+            // 
+            // 
+            // 
             this.txbDataBitsKeyboard.Properties.ReadOnly = true;
             this.txbDataBitsKeyboard.Size = new System.Drawing.Size(152, 20);
             this.txbDataBitsKeyboard.StyleController = this.layoutControl1;
@@ -358,6 +384,9 @@
             this.txbParityKeyboard.Location = new System.Drawing.Point(480, 78);
             this.txbParityKeyboard.MenuManager = this.ribbonControl1;
             this.txbParityKeyboard.Name = "txbParityKeyboard";
+            // 
+            // 
+            // 
             this.txbParityKeyboard.Properties.ReadOnly = true;
             this.txbParityKeyboard.Size = new System.Drawing.Size(152, 20);
             this.txbParityKeyboard.StyleController = this.layoutControl1;
@@ -368,6 +397,9 @@
             this.txbStopBitsKeyboard.Location = new System.Drawing.Point(636, 78);
             this.txbStopBitsKeyboard.MenuManager = this.ribbonControl1;
             this.txbStopBitsKeyboard.Name = "txbStopBitsKeyboard";
+            // 
+            // 
+            // 
             this.txbStopBitsKeyboard.Properties.ReadOnly = true;
             this.txbStopBitsKeyboard.Size = new System.Drawing.Size(152, 20);
             this.txbStopBitsKeyboard.StyleController = this.layoutControl1;
@@ -377,6 +409,9 @@
             // 
             this.txbBaudrateLed.Location = new System.Drawing.Point(168, 185);
             this.txbBaudrateLed.Name = "txbBaudrateLed";
+            // 
+            // 
+            // 
             this.txbBaudrateLed.Properties.ReadOnly = true;
             this.txbBaudrateLed.Size = new System.Drawing.Size(152, 20);
             this.txbBaudrateLed.StyleController = this.layoutControl1;
@@ -386,6 +421,9 @@
             // 
             this.txbDataBitsLed.Location = new System.Drawing.Point(324, 185);
             this.txbDataBitsLed.Name = "txbDataBitsLed";
+            // 
+            // 
+            // 
             this.txbDataBitsLed.Properties.ReadOnly = true;
             this.txbDataBitsLed.Size = new System.Drawing.Size(152, 20);
             this.txbDataBitsLed.StyleController = this.layoutControl1;
@@ -395,6 +433,9 @@
             // 
             this.txbParityLed.Location = new System.Drawing.Point(480, 185);
             this.txbParityLed.Name = "txbParityLed";
+            // 
+            // 
+            // 
             this.txbParityLed.Properties.ReadOnly = true;
             this.txbParityLed.Size = new System.Drawing.Size(152, 20);
             this.txbParityLed.StyleController = this.layoutControl1;
@@ -404,6 +445,9 @@
             // 
             this.txbStopBitsLed.Location = new System.Drawing.Point(636, 185);
             this.txbStopBitsLed.Name = "txbStopBitsLed";
+            // 
+            // 
+            // 
             this.txbStopBitsLed.Properties.ReadOnly = true;
             this.txbStopBitsLed.Size = new System.Drawing.Size(152, 20);
             this.txbStopBitsLed.StyleController = this.layoutControl1;
@@ -414,6 +458,9 @@
             this.speDisplayModeLedAddress.EditValue = "";
             this.speDisplayModeLedAddress.Location = new System.Drawing.Point(324, 225);
             this.speDisplayModeLedAddress.Name = "speDisplayModeLedAddress";
+            // 
+            // 
+            // 
             this.speDisplayModeLedAddress.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.speDisplayModeLedAddress.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Clear)});
@@ -430,6 +477,9 @@
             this.speDisplayNumberLedAddress.EditValue = "";
             this.speDisplayNumberLedAddress.Location = new System.Drawing.Point(168, 225);
             this.speDisplayNumberLedAddress.Name = "speDisplayNumberLedAddress";
+            // 
+            // 
+            // 
             this.speDisplayNumberLedAddress.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.speDisplayNumberLedAddress.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Clear)});
@@ -447,6 +497,9 @@
             this.speDevicdeIdLed.Location = new System.Drawing.Point(12, 225);
             this.speDevicdeIdLed.MenuManager = this.ribbonControl1;
             this.speDevicdeIdLed.Name = "speDevicdeIdLed";
+            // 
+            // 
+            // 
             this.speDevicdeIdLed.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.speDevicdeIdLed.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Clear)});
@@ -464,6 +517,9 @@
             this.speDevicdeIdKeyboard.Location = new System.Drawing.Point(12, 119);
             this.speDevicdeIdKeyboard.MenuManager = this.ribbonControl1;
             this.speDevicdeIdKeyboard.Name = "speDevicdeIdKeyboard";
+            // 
+            // 
+            // 
             this.speDevicdeIdKeyboard.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.speDevicdeIdKeyboard.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Clear)});
@@ -481,6 +537,9 @@
             this.speCallCommandAddress.Location = new System.Drawing.Point(168, 119);
             this.speCallCommandAddress.MenuManager = this.ribbonControl1;
             this.speCallCommandAddress.Name = "speCallCommandAddress";
+            // 
+            // 
+            // 
             this.speCallCommandAddress.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.speCallCommandAddress.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Clear)});
@@ -498,6 +557,9 @@
             this.speDisplayNumberKeyboardAddress.Location = new System.Drawing.Point(324, 119);
             this.speDisplayNumberKeyboardAddress.MenuManager = this.ribbonControl1;
             this.speDisplayNumberKeyboardAddress.Name = "speDisplayNumberKeyboardAddress";
+            // 
+            // 
+            // 
             this.speDisplayNumberKeyboardAddress.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.speDisplayNumberKeyboardAddress.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Clear)});
@@ -515,6 +577,9 @@
             this.speRemainAddress.Location = new System.Drawing.Point(480, 119);
             this.speRemainAddress.MenuManager = this.ribbonControl1;
             this.speRemainAddress.Name = "speRemainAddress";
+            // 
+            // 
+            // 
             this.speRemainAddress.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.speRemainAddress.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Clear)});
@@ -532,6 +597,9 @@
             this.spePiorityAddress.Location = new System.Drawing.Point(636, 119);
             this.spePiorityAddress.MenuManager = this.ribbonControl1;
             this.spePiorityAddress.Name = "spePiorityAddress";
+            // 
+            // 
+            // 
             this.spePiorityAddress.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.spePiorityAddress.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Clear)});
